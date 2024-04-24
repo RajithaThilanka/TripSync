@@ -27,8 +27,8 @@ const Login = () => {
     console.log(values);
     setTimeout(() => {
       setIsLoading(false);
-      navigation.navigate("HomeScreen");
-    }, 2000);
+      navigation.navigate("MainScreen");
+    }, 100);
   };
 
   if (isLoading) {
