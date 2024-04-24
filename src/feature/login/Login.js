@@ -1,5 +1,11 @@
-import React from "react";
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { Input, Button, Icon, Text, Image } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -14,6 +20,26 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
   const navigation = useNavigation();
   const currentYear = new Date().getFullYear();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = (values) => {
+    setIsLoading(true);
+    console.log(values);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigation.navigate("HomeScreen");
+    }, 2000);
+  };
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color="#007bff" />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 0.8 }}>
       <View style={styles.containerImage}>
@@ -27,10 +53,7 @@ const Login = () => {
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={LoginSchema}
-          onSubmit={(values) => {
-            console.log(values);
-            navigation.navigate("HomeScreen");
-          }}
+          onSubmit={handleSubmit}
         >
           {({
             handleChange,
@@ -137,6 +160,11 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: "#007bff",
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 export default Login;
