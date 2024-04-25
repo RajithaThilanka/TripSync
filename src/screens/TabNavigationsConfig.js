@@ -6,6 +6,8 @@ import ProfileScreen from "../feature/profile/Profile";
 import LogScreen from "../feature/logs/LogScreen";
 import { Entypo } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
+import MapScreen from "../components/MapScreen";
+import { Feather } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +29,7 @@ const TabNavigationsConfig = () => {
             <Entypo name="home" size={20} color={color} />
           ),
           tabBarBadge: 7,
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -38,6 +41,20 @@ const TabNavigationsConfig = () => {
             <Foundation name="results" size={20} color={color} />
           ),
           tabBarBadge: 10,
+          headerShown: false,
+        }}
+      />
+
+      <Tab.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{
+          tabBarLabel: "Map",
+          tabBarIcon: ({ color }) => (
+            <Feather name="map-pin" size={20} color={color} />
+          ),
+          tabBarBadge: 10,
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -49,6 +66,7 @@ const TabNavigationsConfig = () => {
             <Ionicons name="person" size={20} color={color} />
           ),
           tabBarBadge: 3,
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

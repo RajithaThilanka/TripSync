@@ -1,31 +1,23 @@
+import React from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import React, { useLayoutEffect } from "react";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../../components/NavOptions";
 import { Button } from "@rneui/themed";
 
-const HomeScreen = ({ route, navigation }) => {
+const HomeScreen = ({ navigation }) => {
   const homeLogo = require("../../../assets/homelogo.jpg");
-  // const { name } = route.params;
-
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({ title: name });
-  // });
 
   return (
-    <SafeAreaView style={tw`bg-white h-full`}>
+    <SafeAreaView style={[styles.safeArea, tw`bg-white`]}>
       <View style={tw`p-10`}>
-        <Image
-          source={homeLogo}
-          style={{ width: 200, height: 200, alignItems: "center" }}
-        />
-        <Text style={styles.textStyle}>Trip Sync</Text>
-
+        <Image source={homeLogo} style={[styles.logo, tw`self-center`]} />
+        <Text style={[styles.title, tw`text-center`]}>Trip Sync</Text>
         <NavOptions />
-        <Button
+        {/* <Button
           title="Toggle Drawer"
           onPress={() => navigation.toggleDrawer()}
-        />
+          buttonStyle={styles.button}
+        /> */}
       </View>
     </SafeAreaView>
   );
@@ -34,12 +26,24 @@ const HomeScreen = ({ route, navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  textStyle: {
-    fontSize: 35,
+  safeArea: {
+    flex: 1,
+  },
+  logo: {
+    width: 200,
+    height: 200,
     marginBottom: 20,
   },
-  headerTextStyle: {
-    fontSize: 20,
+  title: {
+    fontSize: 35,
+    color: "#333",
     marginBottom: 20,
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#007bff",
+    marginTop: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 });

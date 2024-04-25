@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
   ScrollView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
   ActivityIndicator,
+  SafeAreaView,
 } from "react-native";
-import { Input, Button, Icon, Text, Image } from "@rneui/themed";
+import { Input, Text, Image, Icon } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { getImage } from "../../helpers/getImage";
+import { Button } from "react-native-elements";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -24,11 +26,10 @@ const Login = () => {
 
   const handleSubmit = (values) => {
     setIsLoading(true);
-    console.log(values);
     setTimeout(() => {
       setIsLoading(false);
       navigation.navigate("MainScreen");
-    }, 100);
+    }, 2000);
   };
 
   if (isLoading) {
@@ -41,15 +42,11 @@ const Login = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 0.8 }}>
-      <View style={styles.containerImage}>
-        <Image
-          style={{ width: 300, height: 200 }}
-          source={getImage("loginLogo")}
-        />
-      </View>
-
-      <View style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.logo} source={getImage("loginLogo")} />
+        </View>
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={LoginSchema}
@@ -74,7 +71,6 @@ const Login = () => {
                 onBlur={handleBlur("email")}
                 value={values.email}
                 errorMessage={touched.email && errors.email ? errors.email : ""}
-                autoComplete="email"
                 inputContainerStyle={styles.inputContainerStyle}
               />
               <Input
@@ -89,14 +85,9 @@ const Login = () => {
                 errorMessage={
                   touched.password && errors.password ? errors.password : ""
                 }
-                autoCompleteType="password"
                 inputContainerStyle={styles.inputContainerStyle}
               />
-              <Button
-                title="Login"
-                onPress={handleSubmit}
-                buttonStyle={styles.loginButton}
-              />
+              <Button title="Login" onPress={handleSubmit} />
               <TouchableOpacity
                 style={styles.signUpContainer}
                 onPress={() => navigation.navigate("SignUpScreen")}
@@ -106,25 +97,38 @@ const Login = () => {
                   <Text style={styles.signUpButton}>Sign Up</Text>
                 </Text>
               </TouchableOpacity>
-
-              <View style={styles.footer}>
-                <Text style={styles.copyRightText}>
-                  © {currentYear} Rajitha Network. All rights reserved.
-                </Text>
-              </View>
             </>
           )}
         </Formik>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Text style={styles.copyRightText}>
+        © {currentYear} Rajitha Network. All rights reserved.
+      </Text>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
+  },
+  container: {
+    flexGrow: 1,
     justifyContent: "center",
     padding: 20,
+  },
+  imageContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  logo: {
+    width: 300,
+    height: 250,
+  },
+  inputContainerStyle: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#86939e",
+    marginVertical: 2,
   },
   signUpContainer: {
     marginTop: 20,
@@ -138,28 +142,12 @@ const styles = StyleSheet.create({
     color: "#007bff",
     fontWeight: "bold",
   },
-  footer: {
-    alignItems: "center",
-    marginBottom: 20,
-    justifyContent: "",
-  },
   copyRightText: {
+    marginTop: 20,
     fontSize: 12,
-    marginTop: 10,
     color: "gray",
     textAlign: "center",
-  },
-  inputContainerStyle: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#86939e",
-  },
-  containerImage: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  loginButton: {
-    backgroundColor: "#007bff",
+    marginBottom: 10,
   },
   centered: {
     flex: 1,
@@ -167,4 +155,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
 export default Login;

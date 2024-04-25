@@ -4,12 +4,13 @@ import SettingScreen from "../feature/settings/Settings";
 import DashbordScreen from "../feature/dashbord/Dashbord";
 import TabNavigationsConfig from "./TabNavigationsConfig";
 
+
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigatorConfig = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="Menu"
       screenOptions={{
         maginTop: 0,
         drawerStyle: {
@@ -32,7 +33,7 @@ const DrawerNavigatorConfig = () => {
         },
       }}
     >
-      <Drawer.Screen name="HomeScreen" component={TabNavigationsConfig} />
+      <Drawer.Screen name="Home" component={TabNavigationsConfig} />
       <Drawer.Screen name="Dashboard" component={DashbordScreen} />
       <Drawer.Screen name="Settings" component={SettingScreen} />
     </Drawer.Navigator>
