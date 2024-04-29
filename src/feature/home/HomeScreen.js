@@ -1,23 +1,17 @@
 import React from "react";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../../components/NavOptions";
-import { Button } from "@rneui/themed";
+import PlaceHolder from "../../components/PlaceHolder";
+import NavFavourites from "../../components/NavFavourites";
 
 const HomeScreen = ({ navigation }) => {
-  const homeLogo = require("../../../assets/homelogo.jpg");
-
   return (
     <SafeAreaView style={[styles.safeArea, tw`bg-white`]}>
       <View style={tw`p-10`}>
-        <Image source={homeLogo} style={[styles.logo, tw`self-center`]} />
-        <Text style={[styles.title, tw`text-center`]}>Trip Sync</Text>
+        <PlaceHolder />
         <NavOptions />
-        {/* <Button
-          title="Toggle Drawer"
-          onPress={() => navigation.toggleDrawer()}
-          buttonStyle={styles.button}
-        /> */}
+        <NavFavourites />
       </View>
     </SafeAreaView>
   );

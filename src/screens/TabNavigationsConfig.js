@@ -3,11 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../feature/home/HomeScreen";
 import { Ionicons } from "@expo/vector-icons";
 import ProfileScreen from "../feature/profile/Profile";
-import LogScreen from "../feature/logs/LogScreen";
 import { Entypo } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
-import MapScreen from "../components/MapScreen";
-import { Feather } from "@expo/vector-icons";
+import ActivitiesScreen from "../feature/activities/Activities";
+import ServicesScreen from "../feature/services/Services";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,25 +32,24 @@ const TabNavigationsConfig = () => {
         }}
       />
       <Tab.Screen
-        name="LogScreen"
-        component={LogScreen}
+        name="ServicesScreen"
+        component={ServicesScreen}
         options={{
-          tabBarLabel: "Logs",
+          tabBarLabel: "Services",
           tabBarIcon: ({ color }) => (
-            <Foundation name="results" size={20} color={color} />
+            <Entypo name="grid" size={24} color="black" />
           ),
-          tabBarBadge: 10,
+          tabBarBadge: 7,
           headerShown: false,
         }}
       />
-
       <Tab.Screen
-        name="MapScreen"
-        component={MapScreen}
+        name="ActivitiesScreen"
+        component={ActivitiesScreen}
         options={{
-          tabBarLabel: "Map",
+          tabBarLabel: "Activities",
           tabBarIcon: ({ color }) => (
-            <Feather name="map-pin" size={20} color={color} />
+            <Foundation name="results" size={20} color={color} />
           ),
           tabBarBadge: 10,
           headerShown: false,
@@ -61,7 +59,7 @@ const TabNavigationsConfig = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: "Profile",
+          tabBarLabel: "Account",
           tabBarIcon: ({ color }) => (
             <Ionicons name="person" size={20} color={color} />
           ),

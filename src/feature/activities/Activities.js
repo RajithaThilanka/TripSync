@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, Card, Text } from "react-native-elements";
 
-const LogScreen = () => {
+const ActivitiesScreen = () => {
   const [deliveries, setDeliveries] = useState([
     {
       id: 1,
@@ -96,7 +96,7 @@ const LogScreen = () => {
   );
 };
 
-export default LogScreen;
+export default ActivitiesScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { getImage } from "../../helpers/getImage";
 import { Button } from "react-native-elements";
+import { Fontisto } from "@expo/vector-icons";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -29,7 +30,7 @@ const Login = () => {
     setTimeout(() => {
       setIsLoading(false);
       navigation.navigate("MainScreen");
-    }, 2000);
+    }, 1000);
   };
 
   if (isLoading) {
