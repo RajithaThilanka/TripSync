@@ -1,20 +1,17 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../../components/NavOptions";
+import PlaceHolder from "../../components/PlaceHolder";
+import NavFavourites from "../../components/NavFavourites";
 
-const HomeScreen = () => {
-  const homeLogo = require("../../../assets/homelogo.jpg");
+const HomeScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={tw`bg-white h-full`}>
+    <SafeAreaView style={[styles.safeArea, tw`bg-white`]}>
       <View style={tw`p-10`}>
-        <Image
-          source={homeLogo}
-          style={{ width: 200, height: 200, alignItems: "center" }}
-        />
-        <Text style={styles.textStyle}>Trip Sync</Text>
-
+        <PlaceHolder />
         <NavOptions />
+        <NavFavourites />
       </View>
     </SafeAreaView>
   );
@@ -23,8 +20,24 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  textStyle: {
-    fontSize: 35,
+  safeArea: {
+    flex: 1,
+  },
+  logo: {
+    width: 200,
+    height: 200,
     marginBottom: 20,
+  },
+  title: {
+    fontSize: 35,
+    color: "#333",
+    marginBottom: 20,
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#007bff",
+    marginTop: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 });

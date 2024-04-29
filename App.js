@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -15,7 +15,12 @@ export default function App() {
         <GestureHandlerRootView style={{ flex: 1 }}>
           <NavigationContainer>
             <SafeAreaProvider>
-              <StackNavigatorConfig />
+              <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{ flex: 1 }}
+              >
+                <StackNavigatorConfig />
+              </KeyboardAvoidingView>
             </SafeAreaProvider>
           </NavigationContainer>
         </GestureHandlerRootView>

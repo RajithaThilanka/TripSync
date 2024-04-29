@@ -1,6 +1,7 @@
 export const imageAssets = {
   logo: require("../../assets/homelogo.jpg"),
-  loginLogo: require("../../assets/deliveryLogo.jpg"),
+  loginLogo: require("../../assets/mainlogo.png"),
+  defaultProfile: require("../../assets/defaulrprofile.jpg"),
   default: require("../../assets/homelogo.jpg"),
 };
 

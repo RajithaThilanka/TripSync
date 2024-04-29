@@ -1,10 +1,19 @@
-import React from "react";
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import { Input, Button, Icon, Text, Image } from "@rneui/themed";
+import React, { useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
+import { Input, Text, Image, Icon } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { getImage } from "../../helpers/getImage";
+import { Button } from "react-native-elements";
+import { Fontisto } from "@expo/vector-icons";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -14,23 +23,35 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
   const navigation = useNavigation();
   const currentYear = new Date().getFullYear();
-  return (
-    <ScrollView contentContainerStyle={{ flexGrow: 0.8 }}>
-      <View style={styles.containerImage}>
-        <Image
-          style={{ width: 300, height: 200 }}
-          source={getImage("loginLogo")}
-        />
-      </View>
+  const [isLoading, setIsLoading] = useState(false);
 
-      <View style={styles.container}>
+  const handleSubmit = (values) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigation.navigate("MainScreen");
+    }, 1000);
+  };
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color="#007bff" />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.logo} source={getImage("loginLogo")} />
+        </View>
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={LoginSchema}
-          onSubmit={(values) => {
-            console.log(values);
-            navigation.navigate("HomeScreen");
-          }}
+          onSubmit={handleSubmit}
         >
           {({
             handleChange,
@@ -51,7 +72,6 @@ const Login = () => {
                 onBlur={handleBlur("email")}
                 value={values.email}
                 errorMessage={touched.email && errors.email ? errors.email : ""}
-                autoComplete="email"
                 inputContainerStyle={styles.inputContainerStyle}
               />
               <Input
@@ -66,14 +86,9 @@ const Login = () => {
                 errorMessage={
                   touched.password && errors.password ? errors.password : ""
                 }
-                autoCompleteType="password"
                 inputContainerStyle={styles.inputContainerStyle}
               />
-              <Button
-                title="Login"
-                onPress={handleSubmit}
-                buttonStyle={styles.loginButton}
-              />
+              <Button title="Login" onPress={handleSubmit} />
               <TouchableOpacity
                 style={styles.signUpContainer}
                 onPress={() => navigation.navigate("SignUpScreen")}
@@ -83,25 +98,38 @@ const Login = () => {
                   <Text style={styles.signUpButton}>Sign Up</Text>
                 </Text>
               </TouchableOpacity>
-
-              <View style={styles.footer}>
-                <Text style={styles.copyRightText}>
-                  © {currentYear} Rajitha Network. All rights reserved.
-                </Text>
-              </View>
             </>
           )}
         </Formik>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Text style={styles.copyRightText}>
+        © {currentYear} Rajitha Network. All rights reserved.
+      </Text>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
+  },
+  container: {
+    flexGrow: 1,
     justifyContent: "center",
     padding: 20,
+  },
+  imageContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  logo: {
+    width: 300,
+    height: 250,
+  },
+  inputContainerStyle: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#86939e",
+    marginVertical: 2,
   },
   signUpContainer: {
     marginTop: 20,
@@ -115,28 +143,18 @@ const styles = StyleSheet.create({
     color: "#007bff",
     fontWeight: "bold",
   },
-  footer: {
-    alignItems: "center",
-    marginBottom: 20,
-    justifyContent: "",
-  },
   copyRightText: {
+    marginTop: 20,
     fontSize: 12,
-    marginTop: 10,
     color: "gray",
     textAlign: "center",
+    marginBottom: 10,
   },
-  inputContainerStyle: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#86939e",
-  },
-  containerImage: {
+  centered: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  loginButton: {
-    backgroundColor: "#007bff",
-  },
 });
+
 export default Login;
