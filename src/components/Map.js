@@ -43,9 +43,10 @@ const Map = () => {
 
       try {
         const response = await fetch(URL);
-        const json = await response.json();
-        const data = await response.data();
-        dispatch(setTravelTimeInformation(data.row[0].elements[0]));
+        console.log(response);
+        // const data = await response.data();
+        // console.log(data);
+        // dispatch(setTravelTimeInformation(data.row[0].elements[0]));
       } catch (error) {
         console.error(error);
       }
@@ -56,7 +57,6 @@ const Map = () => {
 
   return (
     <MapView
-      //   provider={PROVIDER_GOOGLE}
       ref={mapRef}
       style={styles.map}
       mapType="mutedStandard"

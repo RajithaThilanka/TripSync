@@ -23,16 +23,19 @@ const RideOptionsCard = () => {
     {
       id: "Uber-X-123",
       title: "Uber X",
+      multiplier: 1, // Define multiplier here as part of the data object
       image: require("../../assets/car.png"),
     },
     {
       id: "Uber-XL-456",
       title: "Uber XL",
+      multiplier: 1.2, // Different multiplier for a larger car
       image: require("../../assets/car.png"),
     },
     {
       id: "Uber-LUX-789",
       title: "Uber LUX",
+      multiplier: 1.75, // Higher multiplier for a luxury service
       image: require("../../assets/car.png"),
     },
   ];
@@ -56,7 +59,7 @@ const RideOptionsCard = () => {
       disabled={!selected}
       style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`}
     >
-      <Text style={tw`text-center text-white py-5 text-xl`}>
+      <Text style={tw`text-center text-white text-xl`}>
         Choose {selected?.title}
       </Text>
     </TouchableOpacity>
@@ -93,7 +96,7 @@ const RideOptionsCard = () => {
               }).format(
                 (traveTimeInformation?.distance?.value *
                   SURGE_CHARGE_RATE *
-                  multiplier) /
+                  item.multiplier) /
                   100
               )}
             </Text>

@@ -40,7 +40,7 @@ const NavOptions = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate(item.screen)}
           style={tw`p-2 pl-6 pb-8 pt-4 m-2 `}
-          // disabled={!origin}
+          disabled={!origin}
         >
           <View
             style={tw`bg-white rounded-lg shadow-lg p-2 items-center justify-center`}
