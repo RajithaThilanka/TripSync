@@ -38,15 +38,11 @@ const Map = () => {
   useEffect(() => {
     const getTravelTime = async () => {
       if (!origin || !destination) return;
-
-      const URL = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin.description}&destination=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`;
-
+      const URL = `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destination.description}&origins=${origin.description}&units=imperial&key=${GOOGLE_MAPS_APIKEY}`;
       try {
         const response = await fetch(URL);
-        console.log(response);
-        // const data = await response.data();
-        // console.log(data);
-        // dispatch(setTravelTimeInformation(data.row[0].elements[0]));
+        const data = await response.json();
+        dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
       } catch (error) {
         console.error(error);
       }

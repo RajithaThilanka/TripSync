@@ -23,19 +23,19 @@ const RideOptionsCard = () => {
     {
       id: "Uber-X-123",
       title: "Uber X",
-      multiplier: 1, // Define multiplier here as part of the data object
+      multiplier: 1,
       image: require("../../assets/car.png"),
     },
     {
       id: "Uber-XL-456",
       title: "Uber XL",
-      multiplier: 1.2, // Different multiplier for a larger car
+      multiplier: 1.2,
       image: require("../../assets/car.png"),
     },
     {
       id: "Uber-LUX-789",
       title: "Uber LUX",
-      multiplier: 1.75, // Higher multiplier for a luxury service
+      multiplier: 1.75,
       image: require("../../assets/car.png"),
     },
   ];
@@ -86,7 +86,7 @@ const RideOptionsCard = () => {
             <View style={tw`ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{item.title}</Text>
               <Text style={tw`text-xl font-semibold`}>
-                {traveTimeInformation?.duration?.text} Travel Time
+                {traveTimeInformation?.duration?.text}
               </Text>
             </View>
             <Text style={tw`text-xl font-semibold`}>
