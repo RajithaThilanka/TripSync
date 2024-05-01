@@ -21,22 +21,28 @@ const RideOptionsCard = () => {
   const traveTimeInformation = useSelector(selectTravelTimeInformation);
   const data = [
     {
+      id: "Uber-X-001",
+      title: "Tuk",
+      multiplier: 0.75,
+      image: require("../../assets/tuktuk.png"),
+    },
+    {
       id: "Uber-X-123",
-      title: "Uber X",
+      title: "Car",
       multiplier: 1,
-      image: require("../../assets/car.png"),
+      image: require("../../assets/smallcar.png"),
     },
     {
       id: "Uber-XL-456",
-      title: "Uber XL",
+      title: "Car",
       multiplier: 1.2,
       image: require("../../assets/car.png"),
     },
     {
       id: "Uber-LUX-789",
-      title: "Uber LUX",
+      title: "Van",
       multiplier: 1.75,
-      image: require("../../assets/car.png"),
+      image: require("../../assets/van.png"),
     },
   ];
 
@@ -92,7 +98,7 @@ const RideOptionsCard = () => {
             <Text style={tw`text-xl font-semibold`}>
               {new Intl.NumberFormat("en-gb", {
                 style: "currency",
-                currency: "GBP",
+                currency: "LKR",
               }).format(
                 (traveTimeInformation?.distance?.value *
                   SURGE_CHARGE_RATE *

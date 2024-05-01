@@ -1,11 +1,14 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { FlatList } from "react-native-gesture-handler";
 import tw from "tailwind-react-native-classnames";
+import * as Location from "expo-location";
 
 const NavFavourites = () => {
-  const data = [
+  const [data, setData] = useState([
     {
       id: 1,
       icon: "home",
@@ -18,7 +21,28 @@ const NavFavourites = () => {
       location: "Work",
       destination: "Itx360, Sri Lanka",
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.error("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setData((prevData) => [
+        ...prevData,
+        {
+          id: prevData.length + 1,
+          icon: "location-sharp",
+          location: "Current Location",
+          destination: `${location.coords.latitude}, ${location.coords.longitude}`,
+        },
+      ]);
+    })();
+  }, []);
 
   return (
     <FlatList

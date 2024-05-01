@@ -70,6 +70,9 @@ const Map = () => {
           apikey={GOOGLE_MAPS_APIKEY}
           strokeColor="black"
           strokeWidth={3}
+          mode="DRIVING"
+          optimizeWaypoints={true}
+          region="LK"
         />
       )}
       {origin?.location && (
@@ -81,6 +84,7 @@ const Map = () => {
           title="Origin"
           description={origin.description}
           identifier="origin"
+          pinColor="green"
         />
       )}
       {destination?.location && (
